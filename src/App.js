@@ -15,7 +15,9 @@ const StyledApp = styled.div`
   font-size: calc(10px + 2vmin);
   color: white;
 `;
-const JokeText = styled.span``;
+const JokeText = styled.span`
+  text-align: center;
+`;
 
 const App = () => {
   const [isFinishedLoading, updateIsFinishedLoading] = useState(false);
