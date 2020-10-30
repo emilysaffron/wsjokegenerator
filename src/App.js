@@ -1,4 +1,6 @@
 import React, { componentDidMount, useState, useEffect } from "react";
+import { useRef } from "react";
+import audio from "./airhorn.m4a";
 import styled from "@emotion/styled";
 import "./normalise.css";
 import Button from "./Button";
@@ -18,6 +20,8 @@ const JokeText = styled.span``;
 const App = () => {
   const [isFinishedLoading, updateIsFinishedLoading] = useState(false);
   const [joke, updateJoke] = useState(null);
+  const audioElementRef = useRef(null);
+
   /*  this caused an infinite loop lol
   useEffect(() => {
     isFinishedLoading ? fetchJoke() : updateIsFinishedLoading(true);
@@ -32,13 +36,16 @@ const App = () => {
     };
     const response = await fetch(url, options);
     const data = await response.json();
+    const audio = audioElementRef.current;
 
+    audio.play();
     updateJoke(data.joke);
   };
   return (
     <StyledApp>
       {joke ? <JokeText> {joke}</JokeText> : null}
       <br />
+      <audio ref={audioElementRef} src={audio} />
       <Button handleClick={fetchJoke} />
     </StyledApp>
   );
