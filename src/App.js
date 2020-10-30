@@ -21,7 +21,7 @@ const App = () => {
 
   useEffect(() => {
     isFinishedLoading
-      ? console.log("still loading")
+      ? console.log("finished loading")
       : updateIsFinishedLoading(true);
   }, [joke]);
 
