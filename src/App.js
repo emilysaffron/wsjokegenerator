@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import styled from "@emotion/styled";
+import "./normalise.css";
+import Button from "./Button";
 
-function App() {
+const StyledApp = styled.div`
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+`;
+const JokeText = styled.span``;
+
+const App = () => {
+  const [run, updateRun] = useState(false);
+  const [joke, updateJoke] = useState(null);
+
+  useEffect(() => {
+    run ? (console.log("use effect called")) : return;
+  }, [joke]);
+
+  const fetchJoke = () => {
+    updateJoke("joke");
+    updateRun(true);
+    console.log("fetching");
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StyledApp>
+      {joke ? <JokeText> {joke}</JokeText> : null}
+      <Button handleClick={fetchJoke} />
+    </StyledApp>
   );
-}
+};
 
 export default App;
