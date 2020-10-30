@@ -16,16 +16,17 @@ const StyledApp = styled.div`
 const JokeText = styled.span``;
 
 const App = () => {
-  const [run, updateRun] = useState(false);
+  const [isFinishedLoading, updateIsFinishedLoading] = useState(false);
   const [joke, updateJoke] = useState(null);
 
   useEffect(() => {
-    run ? (console.log("use effect called")) : return;
+    isFinishedLoading
+      ? console.log("still loading")
+      : updateIsFinishedLoading(true);
   }, [joke]);
 
   const fetchJoke = () => {
     updateJoke("joke");
-    updateRun(true);
     console.log("fetching");
   };
   return (
