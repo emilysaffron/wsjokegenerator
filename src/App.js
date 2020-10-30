@@ -25,11 +25,16 @@ const App = () => {
   const audioElementRef = useRef(null);
 
   /*  this caused an infinite loop lol
+
   useEffect(() => {
     isFinishedLoading ? fetchJoke() : updateIsFinishedLoading(true);
   }, [joke]); */
 
   const fetchJoke = async () => {
+    const audio = audioElementRef.current;
+    audio.pause();
+    audio.currentTime = 0;
+
     const url = "https://icanhazdadjoke.com";
     const options = {
       headers: {
@@ -38,7 +43,6 @@ const App = () => {
     };
     const response = await fetch(url, options);
     const data = await response.json();
-    const audio = audioElementRef.current;
 
     audio.play();
     updateJoke(data.joke);
