@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "@emotion/styled";
 const StyledButton = styled.button`
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   outline: none;
-  background-color: tomato;
+  background-color: red;
 `;
 
 const Button = ({ handleClick }) => {

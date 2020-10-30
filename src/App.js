@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { componentDidMount, useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import "./normalise.css";
 import Button from "./Button";
@@ -18,20 +18,27 @@ const JokeText = styled.span``;
 const App = () => {
   const [isFinishedLoading, updateIsFinishedLoading] = useState(false);
   const [joke, updateJoke] = useState(null);
-
+  /*  this caused an infinite loop lol
   useEffect(() => {
-    isFinishedLoading
-      ? console.log("finished loading")
-      : updateIsFinishedLoading(true);
-  }, [joke]);
+    isFinishedLoading ? fetchJoke() : updateIsFinishedLoading(true);
+  }, [joke]); */
 
-  const fetchJoke = () => {
-    updateJoke("joke");
-    console.log("fetching");
+  const fetchJoke = async () => {
+    const url = "https://icanhazdadjoke.com";
+    const options = {
+      headers: {
+        Accept: "application/json",
+      },
+    };
+    const response = await fetch(url, options);
+    const data = await response.json();
+
+    updateJoke(data.joke);
   };
   return (
     <StyledApp>
       {joke ? <JokeText> {joke}</JokeText> : null}
+      <br />
       <Button handleClick={fetchJoke} />
     </StyledApp>
   );
