@@ -1,4 +1,4 @@
-import React, { componentDidMount, useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useRef } from "react";
 import audio from "./airhorn.m4a";
 import styled from "@emotion/styled";
@@ -20,7 +20,6 @@ const JokeText = styled.span`
 `;
 
 const App = () => {
-  const [isFinishedLoading, updateIsFinishedLoading] = useState(false);
   const [joke, updateJoke] = useState(null);
   const audioElementRef = useRef(null);
 
