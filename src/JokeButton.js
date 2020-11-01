@@ -16,6 +16,7 @@ const JokeLogo = styled.img`
   height: 300px;
   cursor: pointer;
   margin: 10px;
+  outline: none;
 `;
 
 const JokeButton = ({ handleClick }) => {

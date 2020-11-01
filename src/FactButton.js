@@ -16,6 +16,7 @@ const FactLogo = styled.img`
   height: 265px;
   cursor: pointer;
   margin: 10px;
+  outline: none;
 `;
 
 const FactButton = ({ handleClick }) => {

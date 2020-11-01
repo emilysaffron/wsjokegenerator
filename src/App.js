@@ -23,33 +23,55 @@ const StyledApp = styled.div`
 const JokeText = styled.span`
   text-align: center;
   padding: 10px;
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
 `;
 
 const FactText = styled.span`
   text-align: center;
   padding: 10px;
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
 `;
 
 const StyledLaugh = styled.img`
   height: 300px;
   cursor: pointer;
   margin: 10px;
+
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
 `;
 
 const StyledThink = styled.img`
   height: 265px;
   cursor: pointer;
   margin: 10px;
+
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
 `;
 
 const StyledMute = styled.img`
   width: 200px;
   cursor: pointer;
+
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
 `;
 
 const FaceDiv = styled.div`
   display: flex;
   align-items: inherit;
+
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
 `;
 
 const App = () => {
