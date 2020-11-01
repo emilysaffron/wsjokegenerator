@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/core";
-import laugh from "./laugh.svg";
+import think from "./fact.svg";
 
 const rotate360 = keyframes`
   from {
@@ -11,17 +11,18 @@ const rotate360 = keyframes`
     transform: rotate(360deg);
   }
 `;
-const AppLogo = styled.img`
+const FactLogo = styled.img`
   animation: ${rotate360} 1s linear;
-  height: 300px;
+  height: 265px;
   cursor: pointer;
+  margin: 10px;
 `;
 
-const Button = ({ handleClick }) => {
+const FactButton = ({ handleClick }) => {
   return (
     <>
-      <AppLogo onClick={handleClick} src={laugh} /> 
+      <FactLogo onClick={handleClick} src={think} />
     </>
   );
 };
-export default Button;
+export default FactButton;

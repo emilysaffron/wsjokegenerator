@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useRef } from "react";
 import audio from "./airhorn.m4a";
+import wow from "./wow.mp3";
 import styled from "@emotion/styled";
 import "./normalise.css";
-import Button from "./Button";
+import JokeButton from "./JokeButton";
+import FactButton from "./FactButton";
 import laugh from "./laugh.svg";
+import think from "./fact.svg";
 const StyledApp = styled.div`
   background-color: #282c34;
   min-height: 100vh;
@@ -19,15 +22,34 @@ const JokeText = styled.span`
   text-align: center;
 `;
 
+const FactText = styled.span`
+  text-align: center;
+`;
+
 const StyledLaugh = styled.img`
   height: 300px;
   cursor: pointer;
+  margin: 10px;
+`;
+
+const StyledThink = styled.img`
+  height: 265px;
+  cursor: pointer;
+  margin: 10px;
+`;
+
+const FaceDiv = styled.div`
+  display: flex;
+  align-items: inherit;
 `;
 
 const App = () => {
   const [joke, updateJoke] = useState(null);
+  const [fact, updateFact] = useState(null);
   const audioElementRef = useRef(null);
-  const [spin, updateSpin] = useState(false);
+  const factElementRef = useRef(null);
+  const [jokeSpin, updateJokeSpin] = useState(false);
+  const [factSpin, updateFactSpin] = useState(false);
   /*  this caused an infinite loop lol
 
   useEffect(() => {
@@ -35,7 +57,7 @@ const App = () => {
   }, [joke]); */
 
   const fetchJoke = async () => {
-    updateSpin(true);
+    updateJokeSpin(true);
     const audio = audioElementRef.current;
     audio.pause();
     audio.currentTime = 0;
@@ -51,22 +73,54 @@ const App = () => {
 
     audio.play();
     updateJoke(data.joke);
+    updateFact(null);
     setTimeout(setStill, 900);
   };
 
   const setStill = () => {
-    updateSpin(false);
+    updateJokeSpin(false);
+    updateFactSpin(false);
   };
+
+  const fetchFact = async () => {
+    updateFactSpin(true);
+    const wow = factElementRef.current;
+    wow.pause();
+    wow.currentTime = 0;
+
+    const url = "https://uselessfacts.jsph.pl/random.json?language=en";
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    wow.play();
+    updateFact(data.text);
+    updateJoke(null);
+    setTimeout(setStill, 900);
+  };
+
   return (
     <StyledApp>
       {joke ? <JokeText> {joke}</JokeText> : null}
+      {fact ? <FactText>{fact}</FactText> : null}
       <br />
       <audio ref={audioElementRef} src={audio} />
-      {spin ? (
-        <Button handleClick={fetchJoke} />
-      ) : (
-        <StyledLaugh src={laugh} onClick={fetchJoke} />
-      )}
+      <audio ref={factElementRef} src={wow} />
+
+      <FaceDiv>
+        {jokeSpin ? (
+          <JokeButton handleClick={fetchJoke} />
+        ) : (
+          <StyledLaugh src={laugh} onClick={fetchJoke} />
+        )}
+        <br />
+        <br />
+        {factSpin ? (
+          <FactButton handleClick={fetchFact} />
+        ) : (
+          <StyledThink src={think} onClick={fetchFact} />
+        )}
+      </FaceDiv>
     </StyledApp>
   );
 };
