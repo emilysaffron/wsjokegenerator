@@ -1,17 +1,26 @@
 import React from "react";
 import styled from "@emotion/styled";
-const StyledButton = styled.button`
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  outline: none;
-  background-color: red;
+import { keyframes } from "@emotion/core";
+import laugh from "./laugh.svg";
+
+const rotate360 = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+const AppLogo = styled.img`
+  animation: ${rotate360} 1s linear;
+  height: 300px;
+  cursor: pointer;
 `;
 
 const Button = ({ handleClick }) => {
   return (
     <>
-      <StyledButton onClick={handleClick} />
+      <AppLogo onClick={handleClick} src={laugh} /> 
     </>
   );
 };

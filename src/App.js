@@ -4,7 +4,7 @@ import audio from "./airhorn.m4a";
 import styled from "@emotion/styled";
 import "./normalise.css";
 import Button from "./Button";
-
+import laugh from "./laugh.svg";
 const StyledApp = styled.div`
   background-color: #282c34;
   min-height: 100vh;
@@ -19,10 +19,15 @@ const JokeText = styled.span`
   text-align: center;
 `;
 
+const StyledLaugh = styled.img`
+  height: 300px;
+  cursor: pointer;
+`;
+
 const App = () => {
   const [joke, updateJoke] = useState(null);
   const audioElementRef = useRef(null);
-
+  const [spin, updateSpin] = useState(false);
   /*  this caused an infinite loop lol
 
   useEffect(() => {
@@ -30,6 +35,7 @@ const App = () => {
   }, [joke]); */
 
   const fetchJoke = async () => {
+    updateSpin(true);
     const audio = audioElementRef.current;
     audio.pause();
     audio.currentTime = 0;
@@ -45,13 +51,22 @@ const App = () => {
 
     audio.play();
     updateJoke(data.joke);
+    setTimeout(setStill, 900);
+  };
+
+  const setStill = () => {
+    updateSpin(false);
   };
   return (
     <StyledApp>
       {joke ? <JokeText> {joke}</JokeText> : null}
       <br />
       <audio ref={audioElementRef} src={audio} />
-      <Button handleClick={fetchJoke} />
+      {spin ? (
+        <Button handleClick={fetchJoke} />
+      ) : (
+        <StyledLaugh src={laugh} onClick={fetchJoke} />
+      )}
     </StyledApp>
   );
 };
