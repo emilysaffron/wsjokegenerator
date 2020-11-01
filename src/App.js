@@ -59,6 +59,7 @@ const App = () => {
   const fetchJoke = async () => {
     updateJokeSpin(true);
     const audio = audioElementRef.current;
+
     audio.pause();
     audio.currentTime = 0;
 
