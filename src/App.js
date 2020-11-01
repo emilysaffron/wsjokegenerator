@@ -59,7 +59,12 @@ const App = () => {
   }, [joke]); */
 
   const fetchJoke = async () => {
+    setFactStill();
     updateJokeSpin(true);
+    if (factElementRef) {
+      factElementRef.current.pause();
+      factElementRef.current.currentTime = 0;
+    }
     const audio = audioElementRef.current;
 
     audio.pause();
@@ -77,16 +82,24 @@ const App = () => {
     audio.play();
     updateJoke(data.joke);
     updateFact(null);
-    setTimeout(setStill, 900);
+    setTimeout(setJokeStill, 900);
   };
 
-  const setStill = () => {
+  const setJokeStill = () => {
     updateJokeSpin(false);
+  };
+
+  const setFactStill = () => {
     updateFactSpin(false);
   };
 
   const fetchFact = async () => {
+    setJokeStill();
     updateFactSpin(true);
+    if (audioElementRef) {
+      audioElementRef.current.pause();
+      audioElementRef.current.currentTime = 0;
+    }
     const wow = factElementRef.current;
     wow.pause();
     wow.currentTime = 0;
@@ -99,7 +112,7 @@ const App = () => {
     wow.play();
     updateFact(data.text);
     updateJoke(null);
-    setTimeout(setStill, 900);
+    setTimeout(setFactStill, 900);
   };
 
   return (
