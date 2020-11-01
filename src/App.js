@@ -6,6 +6,8 @@ import styled from "@emotion/styled";
 import "./normalise.css";
 import JokeButton from "./JokeButton";
 import FactButton from "./FactButton";
+import MuteButton from "./Mute";
+import muted from "./mute.svg";
 import laugh from "./laugh.svg";
 import think from "./fact.svg";
 const StyledApp = styled.div`
@@ -40,6 +42,11 @@ const StyledThink = styled.img`
   margin: 10px;
 `;
 
+const StyledMute = styled.img`
+  width: 200px;
+  cursor: pointer;
+`;
+
 const FaceDiv = styled.div`
   display: flex;
   align-items: inherit;
@@ -52,6 +59,7 @@ const App = () => {
   const factElementRef = useRef(null);
   const [jokeSpin, updateJokeSpin] = useState(false);
   const [factSpin, updateFactSpin] = useState(false);
+  const [mute, updateMute] = useState(false);
   /*  this caused an infinite loop lol
 
   useEffect(() => {
@@ -78,8 +86,9 @@ const App = () => {
     };
     const response = await fetch(url, options);
     const data = await response.json();
-
-    audio.play();
+    if (!mute) {
+      audio.play();
+    }
     updateJoke(data.joke);
     updateFact(null);
     setTimeout(setJokeStill, 900);
@@ -108,11 +117,16 @@ const App = () => {
 
     const response = await fetch(url);
     const data = await response.json();
-
-    wow.play();
+    if (!mute) {
+      wow.play();
+    }
     updateFact(data.text);
     updateJoke(null);
     setTimeout(setFactStill, 900);
+  };
+
+  const setMute = () => {
+    updateMute(!mute);
   };
 
   return (
@@ -137,6 +151,11 @@ const App = () => {
           <StyledThink src={think} onClick={fetchFact} />
         )}
       </FaceDiv>
+      {mute ? (
+        <MuteButton handleClick={setMute} />
+      ) : (
+        <StyledMute src={muted} onClick={setMute} />
+      )}
     </StyledApp>
   );
 };
