@@ -126,6 +126,14 @@ const App = () => {
   };
 
   const setMute = () => {
+    if (audioElementRef) {
+      audioElementRef.current.pause();
+      audioElementRef.current.currentTime = 0;
+    }
+    if (factElementRef) {
+      factElementRef.current.pause();
+      factElementRef.current.currentTime = 0;
+    }
     updateMute(!mute);
   };
 
