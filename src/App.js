@@ -20,10 +20,12 @@ const StyledApp = styled.div`
 `;
 const JokeText = styled.span`
   text-align: center;
+  padding: 10px;
 `;
 
 const FactText = styled.span`
   text-align: center;
+  padding: 10px;
 `;
 
 const StyledLaugh = styled.img`
