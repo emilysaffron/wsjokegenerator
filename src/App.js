@@ -133,6 +133,10 @@ const StyledLights = styled.div`
 const StyledTree = styled.div`
   align-self: baseline;
 `;
+const StyledH = styled.h2`
+  margin: 0px;
+  padding: 0px;
+`;
 const App = () => {
   const [joke, updateJoke] = useState(null);
   const [fact, updateFact] = useState(null);
@@ -219,8 +223,37 @@ const App = () => {
     updateMute(!mute);
   };
 
+  const [days, updateDays] = useState(0);
+
+  const [december, updateDecember] = useState(true);
+  const [thisYear, updateThisYear] = useState(true);
+
   const updateXmas = () => {
     toggleXmas(!xmas);
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = dd + "/" + mm + "/" + yyyy;
+
+    let xmasD = "25";
+    let xmasM = "12";
+    let xmasY = yyyy;
+
+    //xmas has happened this year
+    if (mm === xmasM && dd > xmasD) {
+      updateThisYear(false);
+    }
+
+    //its not xmas month yet
+    if (mm !== xmasM) {
+      updateDecember(false);
+    }
+
+    if (thisYear && december) {
+      updateDays(25 - parseInt(dd));
+    }
   };
 
   return xmas ? (
@@ -342,6 +375,7 @@ const App = () => {
           <StyledXmas src={xmasthink} onClick={fetchFact} />
         )}
       </FaceDiv>
+      <StyledH>There are {days} day(s) until Christmas!</StyledH>
       <XmasStuff>
         <StyledTree>
           {" "}
