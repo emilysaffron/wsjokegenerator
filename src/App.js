@@ -239,7 +239,6 @@ const App = () => {
 
     let xmasD = "25";
     let xmasM = "12";
-    let xmasY = yyyy;
 
     //xmas has happened this year
     if (mm === xmasM && dd > xmasD) {
