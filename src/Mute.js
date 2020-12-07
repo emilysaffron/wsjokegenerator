@@ -5,7 +5,8 @@ const MuteButton = ({ handleClick }) => {
   return (
     <Mute
       fill="red"
-      width="200px"
+      width="100px"
+      height="100px"
       onClick={handleClick}
       cursor="pointer"
       outline="none"

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useRef } from "react";
 import audio from "./airhorn.m4a";
 import wow from "./wow.mp3";
+import santa from "./santa.mp3";
+import bells from "./bells.mp3";
 import styled from "@emotion/styled";
 import "./normalise.css";
 import JokeButton from "./JokeButton";
@@ -9,7 +11,13 @@ import FactButton from "./FactButton";
 import MuteButton from "./Mute";
 import muted from "./mute.svg";
 import laugh from "./laugh.svg";
+import elflaugh from "./elflaugh.svg";
+import xmasthink from "./xmasfact.svg";
 import think from "./fact.svg";
+import bell from "./bell.png";
+import lights from "./lights.png";
+import tree from "./xmastree.png";
+
 const StyledApp = styled.div`
   background-color: #282c34;
   min-height: 100vh;
@@ -20,6 +28,18 @@ const StyledApp = styled.div`
   font-size: calc(10px + 2vmin);
   color: white;
 `;
+
+const XmasApp = styled.div`
+  background-color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+`;
+
 const JokeText = styled.span`
   text-align: center;
   padding: 10px;
@@ -56,8 +76,30 @@ const StyledThink = styled.img`
   -ms-user-select: none; /* IE10+ */
 `;
 
-const StyledMute = styled.img`
-  width: 200px;
+const StyledXmas = styled.img`
+  height: 300px;
+  cursor: pointer;
+  margin: 10px;
+
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+`;
+
+const StyledButton = styled.img`
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+`;
+
+const StyledBell = styled.img`
+  width: 100px;
+  height: 100px;
+  margin: 10px;
   cursor: pointer;
 
   -webkit-user-select: none; /* Chrome/Safari */
@@ -73,7 +115,24 @@ const FaceDiv = styled.div`
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+ */
 `;
-
+const Buttons = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+const XmasStuff = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+const StyledLights = styled.div`
+  display: flex;
+`;
+const StyledTree = styled.div`
+  align-self: baseline;
+`;
 const App = () => {
   const [joke, updateJoke] = useState(null);
   const [fact, updateFact] = useState(null);
@@ -82,6 +141,7 @@ const App = () => {
   const [jokeSpin, updateJokeSpin] = useState(false);
   const [factSpin, updateFactSpin] = useState(false);
   const [mute, updateMute] = useState(false);
+  const [xmas, toggleXmas] = useState(false);
   /*  this caused an infinite loop lol
 
   useEffect(() => {
@@ -159,33 +219,178 @@ const App = () => {
     updateMute(!mute);
   };
 
-  return (
+  const updateXmas = () => {
+    toggleXmas(!xmas);
+  };
+
+  return xmas ? (
+    <XmasApp>
+      {joke ? <JokeText> {joke}</JokeText> : null}
+      {fact ? <FactText>{fact}</FactText> : null}
+      <StyledLights>
+        <img
+          alt="lights"
+          src={lights}
+          margin="0px"
+          padding="0px"
+          height="100px"
+          width="100px"
+        />
+        <img
+          alt="lights"
+          src={lights}
+          margin="0px"
+          padding="0px"
+          height="100px"
+          width="100px"
+        />
+        <img
+          alt="lights"
+          src={lights}
+          margin="0px"
+          padding="0px"
+          height="100px"
+          width="100px"
+        />
+        <img
+          alt="lights"
+          src={lights}
+          margin="0px"
+          padding="0px"
+          height="100px"
+          width="100px"
+        />
+        <img
+          alt="lights"
+          src={lights}
+          margin="0px"
+          padding="0px"
+          height="100px"
+          width="100px"
+        />
+        <img
+          alt="lights"
+          src={lights}
+          margin="0px"
+          padding="0px"
+          height="100px"
+          width="100px"
+        />
+        <img
+          alt="lights"
+          src={lights}
+          margin="0px"
+          padding="0px"
+          height="100px"
+          width="100px"
+        />
+        <img
+          alt="lights"
+          src={lights}
+          margin="0px"
+          padding="0px"
+          height="100px"
+          width="100px"
+        />
+        <img
+          alt="lights"
+          src={lights}
+          margin="0px"
+          padding="0px"
+          height="100px"
+          width="100px"
+        />
+        <img
+          alt="lights"
+          src={lights}
+          margin="0px"
+          padding="0px"
+          height="100px"
+          width="100px"
+        />
+        <img
+          alt="lights"
+          src={lights}
+          margin="0px"
+          padding="0px"
+          height="100px"
+          width="100px"
+        />
+        <img
+          alt="lights"
+          src={lights}
+          margin="0px"
+          padding="0px"
+          height="100px"
+          width="100px"
+        />
+      </StyledLights>
+      <br />
+      <audio ref={audioElementRef} src={santa} />
+      <audio ref={factElementRef} src={bells} />
+      <FaceDiv>
+        {jokeSpin ? (
+          <JokeButton handleClick={fetchJoke} xmas={xmas} />
+        ) : (
+          <StyledXmas src={elflaugh} onClick={fetchJoke} />
+        )}
+        <br />
+        <br />
+        {factSpin ? (
+          <FactButton handleClick={fetchFact} xmas={xmas} />
+        ) : (
+          <StyledXmas src={xmasthink} onClick={fetchFact} />
+        )}
+      </FaceDiv>
+      <XmasStuff>
+        <StyledTree>
+          {" "}
+          <img src={tree} alt="xmas tree" height="250px" width="150px" />
+        </StyledTree>
+
+        <Buttons>
+          {mute ? (
+            <MuteButton handleClick={setMute} />
+          ) : (
+            <StyledButton src={muted} onClick={setMute} />
+          )}
+          <StyledBell src={bell} alt="xmas mode button" onClick={updateXmas} />
+        </Buttons>
+        <StyledTree>
+          {" "}
+          <img src={tree} alt="xmas tree" height="250px" width="150px" />
+        </StyledTree>
+      </XmasStuff>
+    </XmasApp>
+  ) : (
     <StyledApp>
       {joke ? <JokeText> {joke}</JokeText> : null}
       {fact ? <FactText>{fact}</FactText> : null}
       <br />
       <audio ref={audioElementRef} src={audio} />
       <audio ref={factElementRef} src={wow} />
-
       <FaceDiv>
         {jokeSpin ? (
-          <JokeButton handleClick={fetchJoke} />
+          <JokeButton handleClick={fetchJoke} xmas={xmas} />
         ) : (
           <StyledLaugh src={laugh} onClick={fetchJoke} />
         )}
         <br />
         <br />
         {factSpin ? (
-          <FactButton handleClick={fetchFact} />
+          <FactButton handleClick={fetchFact} xmas={xmas} />
         ) : (
           <StyledThink src={think} onClick={fetchFact} />
         )}
       </FaceDiv>
-      {mute ? (
-        <MuteButton handleClick={setMute} />
-      ) : (
-        <StyledMute src={muted} onClick={setMute} />
-      )}
+      <Buttons>
+        {mute ? (
+          <MuteButton handleClick={setMute} />
+        ) : (
+          <StyledButton src={muted} onClick={setMute} />
+        )}
+        <StyledBell src={bell} alt="xmas mode button" onClick={updateXmas} />
+      </Buttons>
     </StyledApp>
   );
 };

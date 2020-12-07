@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/core";
 import laugh from "./laugh.svg";
-
+import elflaugh from "./elflaugh.svg";
 const rotate360 = keyframes`
   from {
     transform: rotate(0deg);
@@ -19,10 +19,14 @@ const JokeLogo = styled.img`
   outline: none;
 `;
 
-const JokeButton = ({ handleClick }) => {
+const JokeButton = ({ handleClick, xmas }) => {
   return (
     <>
-      <JokeLogo onClick={handleClick} src={laugh} />
+      {xmas ? (
+        <JokeLogo onClick={handleClick} src={elflaugh} />
+      ) : (
+        <JokeLogo onClick={handleClick} src={laugh} />
+      )}
     </>
   );
 };
