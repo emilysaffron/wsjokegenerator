@@ -384,7 +384,7 @@ const App = () => {
     }
 
     if (thisYear && december) {
-      updateDays(25 - parseInt(dd));
+      updateDays(25 - parseInt(dd) + 365);
     }
   };
 
