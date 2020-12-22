@@ -376,7 +376,7 @@ const App = () => {
     //xmas has happened this year
 
     if (thisYear && december) {
-      updateDays(25 - parseInt(dd) + 365);
+      updateDays(25 - parseInt(dd));
     }
   };
 
