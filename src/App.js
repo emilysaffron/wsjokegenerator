@@ -374,14 +374,6 @@ const App = () => {
     let xmasM = "12";
 
     //xmas has happened this year
-    if (mm === xmasM && dd > xmasD) {
-      updateThisYear(false);
-    }
-
-    //its not xmas month yet
-    if (mm !== xmasM) {
-      updateDecember(false);
-    }
 
     if (thisYear && december) {
       updateDays(25 - parseInt(dd));
