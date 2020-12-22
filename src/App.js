@@ -358,9 +358,6 @@ const App = () => {
 
   const [days, updateDays] = useState(0);
 
-  const [december, updateDecember] = useState(true);
-  const [thisYear, updateThisYear] = useState(true);
-
   const updateXmas = () => {
     toggleXmas(!xmas);
     var today = new Date();
@@ -370,14 +367,9 @@ const App = () => {
 
     today = dd + "/" + mm + "/" + yyyy;
 
-    let xmasD = "25";
-    let xmasM = "12";
-
     //xmas has happened this year
 
-    if (thisYear && december) {
-      updateDays(25 - parseInt(dd));
-    }
+    updateDays(25 - parseInt(dd));
   };
 
   return xmas ? (
